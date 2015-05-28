@@ -1,5 +1,6 @@
 package com.maximus.controller;
 
+import com.maximus.model.Msge;
 import com.maximus.service.BaseService;
 import com.maximus.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -25,7 +27,10 @@ public class MessageController {
 
     @RequestMapping("queryAll")
     public String queryAll(Model model, HttpServletRequest request, HttpServletResponse response,  String channelId) throws UnsupportedEncodingException {
-        return "";
+//        int channel = Integer.valueOf(channelId);
+        List<Msge> msgs = messageService.queryAll(channelId);
+        model.addAttribute("msgs", msgs);
+        return "msg/msgList";
     }
 
     @RequestMapping("queryMsg")

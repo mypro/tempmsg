@@ -57,7 +57,7 @@
     </select>
 
 
-    <select id="queryAll" parameterType="int" resultType="Msge">
+    <select id="queryAll" parameterType="String" resultType="Msge">
         SELECT * FROM MSGE
         WHERE CHANNELID = #{channelId}
     </select>

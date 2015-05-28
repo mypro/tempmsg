@@ -13,11 +13,11 @@
 
 			<ul class="submenu">
 				<li class="" id="menu-mycensor-short"><a
-					href="message/queryAll?channelID=1000"> <i
+					href="msg/queryAll?channelId=1000"> <i
 						class="menu-icon fa fa-file-text"></i> 频道1
 				</a> <b class="arrow"></b></li>
 				<li class="" id="menu-mycensor-long"><a
-					href="message/queryAll?channelID=1001"> <i
+					href="msg/queryAll?channelId=1001"> <i
 						class="menu-icon fa fa-book"></i> 频道2
 				</a> <b class="arrow"></b></li>
 			</ul></li>

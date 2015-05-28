@@ -16,10 +16,10 @@
 
 
 
-INSERT INTO channel VALUES('1000','channel1','channel', NULL,NULL);
-INSERT INTO channel VALUES('1001','channel2','channel', NULL,NULL);
-INSERT INTO msge VALUES('10000','chen','msg','channel1','1000',NULL,NULL);
-INSERT INTO msge VALUES('10001','wei','msg','channel2','1000',NULL,NULL);
+INSERT INTO channel VALUES('1000','channel1','channel', '1432807738908','1432807738908');
+INSERT INTO channel VALUES('1001','channel2','channel', '1432807738908','1432807738908');
+INSERT INTO msge VALUES('10000','chen','我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息我想要很长的一个消息我想要很长的一个消息我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息我想要很长的一个消息我想要很长的一个消息我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息我想要很长的一个消息我想要很长的一个消息我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息，我想要很长的一个消息我想要很长的一个消息我想要很长的一个消息我想要很长的一个消息，我想要很长的一个消息，','channel1','1000','1432807738908','1432807738908');
+INSERT INTO msge VALUES('10001','wei','msg','channel2','1000','1432807738908','1432807738908');
 
 
 INSERT INTO sequence VALUES('msgnum', 1000);

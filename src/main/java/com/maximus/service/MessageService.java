@@ -19,6 +19,6 @@ public interface MessageService {
 
     Msge findMsgByname(String msgName);
 
-    List<Msge> queryAll();
+    List<Msge> queryAll(String channelId);
 
 }

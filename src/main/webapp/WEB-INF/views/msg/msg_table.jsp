@@ -131,7 +131,7 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 		</label></th>
 	</thead>
 	<tbody id="simple-table">
-		<c:forEach items="${channels}" var="row">
+		<c:forEach items="${msgs}" var="row">
 			<tr id="tr-${row.id}" rel="tr">
 				<td>
 					<div class="appid-name center align-middle"></div>
@@ -140,19 +140,18 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 							<c:out value="${row.name}"/>
 						</ul>
 					</div>
-				</td>
-				<td>
+				</td><td>
 					<div class="appid-name center align-middle"></div>
 					<div>
 						<ul class="nav ace-nav center align-middle">
-							<c:out value="${row.description}"/>
+							<c:out value="${row.content}"/>
 						</ul>
 					</div>
 				</td>
 				<td>
 					<div class="appid-name center align-middle"></div>
 					<div>
-							<span name="dateForm" data-date="${row.createTime}" class="label"></span>
+							<c:out value="${row.createTime}" />
 					</div>
 				</td>
 

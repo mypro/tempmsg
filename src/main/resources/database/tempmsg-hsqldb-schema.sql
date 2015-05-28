@@ -17,8 +17,8 @@
 create table msge (
     id int not null,
     name varchar(80) null,
-    content varchar(3000) not null,
-    description varchar(500) not null,
+    content varchar(8000) not null,
+    description varchar(2000) not null,
     channelId int not null,
     createTime BIGINT null,
     updateTime BIGINT null,
@@ -28,7 +28,7 @@ create table msge (
 create table channel (
         id int not null,
         name varchar(80) null,
-        description varchar(500) not null,
+        description varchar(2000) not null,
         createTime BIGINT null,
         updateTime BIGINT null,
     constraint pk_channel primary key (id)

@@ -1,13 +1,13 @@
 package com.demo;
 
+import com.maximus.service.BaseService;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.maximus.service.BaseService;
+import java.util.Date;
 
 public class DemoTest {
 	private static Logger logger = LoggerFactory.getLogger(DemoTest.class);
@@ -16,9 +16,7 @@ public class DemoTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		// 获取baseService
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context-main.xml");
-		baseService = context.getBean("baseService", BaseService.class);
+
 
 	}
 
@@ -28,7 +26,7 @@ public class DemoTest {
 
 	@Test
 	public void test() throws Exception {
-
+		System.out.println(new Date().getTime());
 		logger.debug("~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 	}
 

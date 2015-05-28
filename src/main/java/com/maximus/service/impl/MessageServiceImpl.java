@@ -42,8 +42,8 @@ public class MessageServiceImpl implements MessageService {
         return msge;
     }
 
-    public List<Msge> queryAll() {
-        List<Msge>  msges =  messageDao.queryAll();
+    public List<Msge> queryAll(String channelId) {
+        List<Msge>  msges =  messageDao.queryAll(channelId);
         return msges;
     }
 

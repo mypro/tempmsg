@@ -92,14 +92,9 @@
 						</div>
 
 					</div>
-					<c:if test="${type==1 }">
-						<%@ include file="censor_table_long.jsp"%>
-					</c:if>
-					<c:if test="${type==0 }">
-						<%@ include file="censor_table_short.jsp"%>
-					</c:if>
-					<%@ include file="../censor_pager.jsp"%>
 
+					<%@ include file="msg_table.jsp"%>
+					<%@ include file="../msg_pager.jsp"%>
 
 				</div>
 			</div>

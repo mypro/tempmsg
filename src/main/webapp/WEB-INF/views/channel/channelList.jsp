@@ -94,7 +94,7 @@
 					</div>
 
 					<%@ include file="channel_table.jsp"%>
-
+					<%@ include file="../msg_pager.jsp"%>
 
 				</div>
 			</div>
