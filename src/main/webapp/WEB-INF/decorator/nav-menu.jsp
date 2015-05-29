@@ -6,12 +6,12 @@
 			class="menu-icon fa fa-tachometer"></i> <span class="menu-text">首页</span>
 	</a> <b class="arrow"></b></li>
 
-		<li class="" id="menu-mycensor"><a href="#"
+		<li class="" id="menu-allchannel"><a href="#"
 			class="dropdown-toggle"> <i class="menu-icon fa fa-lock"></i> <span
 				class="menu-text">所有消息</span><b class="arrow fa fa-angle-down"></b>
 		</a> <b class="arrow"></b>
 
-			<ul class="submenu">
+			<ul id="channelsName" class="submenu">
 				<li class="" id="menu-mycensor-short"><a
 					href="msg/queryAll?channelId=1000"> <i
 						class="menu-icon fa fa-file-text"></i> 频道1
@@ -20,11 +20,8 @@
 					href="msg/queryAll?channelId=1001"> <i
 						class="menu-icon fa fa-book"></i> 频道2
 				</a> <b class="arrow"></b></li>
-			</ul></li>
-
-
-
-
+			</ul>
+		</li>
 		<li class="" id="menu-app"><a href="channel/queryAll"> <i
 				class="menu-icon fa fa-gratipay"></i> <span class="menu-text">
 					频道管理 </span>
@@ -77,6 +74,27 @@
 								</a> <b class="arrow"></b></li>
 						</ul></li>
 			</ul></li>
-
-
 </ul>
+<script type="text/javascript">
+$("#menu-allchannel").click(function(){
+		var url = "channel/queryAllforMenu"
+		$.ajax({
+        				url : url,
+        				type : 'POST',
+        				data : data,
+        				datatype : "json",
+        				contentType : "application/json; charset=utf-8",
+        				success : function(result) {
+        					$("#channelsName").clear
+							for(var i=0;i<data.size();i++){
+								$("#channelsName")
+							}
+
+        				},
+        				error : function() {
+        					overLayer('fail', '请求异常', null, dataType);
+        					console.log("请求所以频道失败")
+        				}
+        			});
+});
+</script>
