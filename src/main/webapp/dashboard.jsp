@@ -63,7 +63,7 @@
 			</button>
 
 			<div class="navbar-header pull-left">
-				<a href="" class="navbar-brand"> <small> <i class="fa fa-legal"></i> 临时消息系统
+				<a href="" class="navbar-brand"> <small> <i class="fa fa-legal"></i> web-message
 				</small>
 				</a>
 			</div>
