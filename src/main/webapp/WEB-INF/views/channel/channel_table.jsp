@@ -122,8 +122,8 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 <table id="st"
 	class="table table-striped table-bordered table-hover dataTable no-footer DTTT_selectable">
 	<thead>
-		<th width="100px" class="sorting_disabled center align-middle "></th>
-		<th class="sorting_disabled "></th>
+		<th width="100px" class="sorting_disabled center align-middle ">频道名称</th>
+		<th class="sorting_disabled ">频道描述</th>
 		<th class="sorting_disabled "></th>
 		<th width="10px" class="sorting_disabled center align-middle"><label
 			class="pos-rel"> <input type="checkbox" id="checkAllNeed"

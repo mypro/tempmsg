@@ -19,24 +19,8 @@
 							<div class="col-xs-12">
 								<div class="" id="dynamic-table_length">
 									<form id="searchForm" action="censor/all" method="post">
-										<input type="hidden" name="type" value="${type }"></input> <input
-											type="hidden" name="mid" value="${mid }"></input><input
-											type="hidden" id="delay" name="delay" value="${delay }"></input> <select
-											class="chosen-select form-control" name="companyId"
-											id="form-field-select-2" data-placeholder="Choose a State...">
-											<option value="100">新华网</option>
-										</select> <select name="appId" class="chosen-select form-control"
-											data-levelNum="1" id="firLevel"><option value="-1">全部应用</option>
-										</select><select name="column" class="chosen-select form-control"
-											data-levelNum="2" id="secLevel"><option value="">全部栏目</option>
-										</select> <select name="extendedColumn1"
-											class="chosen-select form-control" data-levelNum="3"
-											id="thiLevelId"><option value="">全部子栏目1</option>
-										</select><select name="extendedColumn2"
-											class="chosen-select form-control" data-levelNum="4"
-											id="fouLevelId"><option value="">全部子栏目2</option>
-										</select><label> <input type="search" class="form-control"
-											placeholder="标题或内容" id="keyword"
+										<label> <input type="search" class="form-control"
+											placeholder="用户或内容" id="keyword"
 											aria-controls="dynamic-table" name="keyword"
 											value="${keyword}"></label> <label
 											style="padding-left: 10px;"><button id="searchBtn"
@@ -59,9 +43,6 @@
 									</span>
 								</c:if>
 								<div class="hidden-sm hidden-xs action-buttons">
-									<c:choose>
-
-										<c:when test="${delay ==0}">
 											<a class="green" href="javascript:batchOper('100')"
 												title="批量通过"> <i class="ace-icon fa fa-check bigger-230"></i>
 											</a>
@@ -72,21 +53,6 @@
 									<a class="blue" href="javascript:batchOper('900')"
 										title="批量添加舆情"> <i class="ace-icon fa fa-star bigger-230"></i>
 									</a>
-										</c:when>
-										<c:otherwise>
-											<a class="green" href="javascript:batchOper('101')"
-												title="批量通过"> <i class="ace-icon fa fa-check bigger-230"></i>
-											</a>
-											<a class="red" href="javascript:batchOper('201')"
-												title="批量删除"> <i
-												class="ace-icon fa fa-trash-o bigger-200"></i>
-											</a>
-											<a class="blue" href="javascript:batchOper('901')"
-												title="批量添加舆情"> <i
-												class="ace-icon fa fa-star bigger-230"></i>
-											</a>
-										</c:otherwise>
-									</c:choose>
 								</div>
 							</div>
 						</div>

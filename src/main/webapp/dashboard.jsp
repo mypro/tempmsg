@@ -11,7 +11,7 @@
 <base href="<%=basePath%>" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta charset="utf-8" />
-<title>新华网统一审核管理平台 - <sitemesh:write property='title' /></title>
+<title>临时消息 - <sitemesh:write property='title' /></title>
 <link rel="icon" href="commons/favicon.ico">
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -63,7 +63,7 @@
 			</button>
 
 			<div class="navbar-header pull-left">
-				<a href="" class="navbar-brand"> <small> <i class="fa fa-legal"></i> 新华网UGC统一审核平台
+				<a href="" class="navbar-brand"> <small> <i class="fa fa-legal"></i> 临时消息系统
 				</small>
 				</a>
 			</div>
