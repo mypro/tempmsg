@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/channel")
-public class ChannelController {
+public class ChannelController extends AbstractAction {
 
     @Autowired
     private BaseService baseService;
@@ -33,6 +35,14 @@ public class ChannelController {
         return "channel/channelList";
     }
 
+    @RequestMapping("queryAllforMenu")
+    public @ResponseBody
+    String queryAllforMenu(Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+
+        List<Channel> channels = channelService.queryAll();
+        model.addAttribute("channels", channels);
+        return returnForAjax(request, response, channels);
+    }
     @RequestMapping("insertChannel")
     public String insertChannel(Model model, HttpServletRequest request, HttpServletResponse response, Map<String, Object> context, String name) throws IOException, ParseException {
         return "message";
@@ -49,7 +59,7 @@ public class ChannelController {
     }
 
     @RequestMapping("removeOne")
-    public String removeOne(Model model, HttpServletRequest request, HttpServletResponse response, Map<String, Object> context, String name) throws IOException, ParseException {
+    public String removeOne(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam(required = false) String channelId) throws IOException, ParseException {
         return "decorator/admin";
     }
 }
