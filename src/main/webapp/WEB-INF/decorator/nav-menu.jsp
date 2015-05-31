@@ -77,19 +77,19 @@
 </ul>
 <script type="text/javascript">
 $("#menu-allchannel").click(function(){
-		var url = "channel/queryAllforMenu"
+		var url = "channel/queryAllforMenu";
+		console.log(url);
 		$.ajax({
         				url : url,
         				type : 'POST',
-        				data : data,
         				datatype : "json",
         				contentType : "application/json; charset=utf-8",
         				success : function(result) {
-        					$("#channelsName").clear
-							for(var i=0;i<data.size();i++){
-								$("#channelsName")
-							}
-
+									console.log(result);
+										//$("#channelsName").removeChilds();
+									for(var i=0;i<result.length;i++){
+										console.log(result[i].name);
+									}
         				},
         				error : function() {
         					overLayer('fail', '请求异常', null, dataType);
