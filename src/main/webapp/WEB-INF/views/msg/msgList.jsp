@@ -8,6 +8,7 @@
 <title>${title}</title>
 </head>
 <body>
+
 	<div class="row">
 		<div class="col-xs-12">
 			<div>
@@ -43,9 +44,10 @@
 									</span>
 								</c:if>
 								<div class="hidden-sm hidden-xs action-buttons">
-											<a class="green" href="javascript:batchOper('100')"
-												title="批量通过"> <i class="ace-icon fa glyphicon-plus bigger-230"></i>
-											</a>
+											<label class="pink"> <i class="ace-icon fa fa-plus green"></i>
+													<a href="#roleadd-modal" role="button" class="blue"
+													data-toggle="modal" data-target="#roleadd-modal">发消息</a>
+											 </label>
 											<a class="red" href="javascript:batchOper('200')"
 												title="批量删除"> <i
 												class="ace-icon fa fa-trash-o bigger-200"></i>

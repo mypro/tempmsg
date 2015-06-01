@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,9 +36,22 @@ public class MessageController extends AbstractAction {
 //        int channel = Integer.valueOf(channelId);
         List<Msge> msgs = messageService.queryAll(channelId);
         model.addAttribute("msgs", msgs);
+        model.addAttribute("channelId", channelId);
         return "msg/msgList";
     }
 
+    @RequestMapping("insertMsg")
+    public String insertMsg(Model model, HttpServletRequest request, HttpServletResponse response,  @RequestParam(required = true) String name,
+                            @RequestParam(required = true) String content,@RequestParam(required = true) String channelId) throws IOException, ParseException {
+        Msge msg = new Msge();
+
+        msg.setName(name);
+        msg.setContent(content);
+        msg.setCreateTime(System.currentTimeMillis());
+        msg.setChannelId(Integer.parseInt(channelId));
+        messageService.insertMessage(msg);
+        return "redirect:/msg/queryAll?channelId="+channelId;
+    }
     @RequestMapping("queryMsg")
     public String searchUser(Model model, HttpServletRequest request, HttpServletResponse response, Map<String, Object> context, String name) throws IOException, ParseException {
         return "message";

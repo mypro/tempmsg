@@ -50,8 +50,14 @@ public class ChannelController extends AbstractAction {
     }
 
     @RequestMapping("insertChannel")
-    public String insertChannel(Model model, HttpServletRequest request, HttpServletResponse response, Map<String, Object> context, String name) throws IOException, ParseException {
-        return "message";
+    public String insertChannel(Model model, HttpServletRequest request, HttpServletResponse response,  @RequestParam(required = true) String name, @RequestParam(required = true) String description) throws IOException, ParseException {
+        Channel cl = new Channel();
+
+        cl.setName(name);
+        cl.setDescription(description);
+        cl.setCreateTime(System.currentTimeMillis());
+        channelService.insertChannel(cl);
+        return "redirect:/channel/queryAll";
     }
 
     @RequestMapping("updateChannel")

@@ -43,9 +43,11 @@
 									</span>
 								</c:if>
 								<div class="hidden-sm hidden-xs action-buttons">
-											<a class="green" href="javascript:batchOper('101')"
-												title="批量通过"> <i class="ace-icon fa glyphicon-plus bigger-230"></i>
-											</a>
+											<label class="pink"> <i class="ace-icon fa fa-plus green"></i>
+                                                                            								<a href="#roleadd-modal" role="button" class="blue"
+                                                                            								data-toggle="modal" data-target="#roleadd-modal">新增频道</a>
+                                             </label>
+
 											<a class="red" href="javascript:batchOper('201')"
 												title="批量删除"> <i
 												class="ace-icon fa fa-trash-o bigger-200"></i>

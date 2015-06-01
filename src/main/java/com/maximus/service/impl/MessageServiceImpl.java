@@ -21,6 +21,7 @@ public class MessageServiceImpl implements MessageService {
     MessageMapper messageDao;
 
     public void insertMessage(Msge msg) {
+        msg.setId(baseService.getNextId("msgnum"));
         messageDao.insertMessage(msg);
     }
 

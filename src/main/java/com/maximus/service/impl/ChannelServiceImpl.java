@@ -19,7 +19,8 @@ public class ChannelServiceImpl implements ChannelService {
     @Autowired
     ChannelMapper channelDao;
 
-    public  void insertChannel(Channel channel){
+    public  void insertChannel(Channel channel) {
+        channel.setId(baseService.getNextId("msgnum"));
         channelDao.insertChannel(channel);
     }
 

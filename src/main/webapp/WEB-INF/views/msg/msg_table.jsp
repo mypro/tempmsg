@@ -163,6 +163,91 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 		</c:forEach>
 	</tbody>
 </table>
+
+<!-- 遮罩层start -->
+	<div id="roleadd-modal" class="modal fade" tabindex="-1">
+		<div class="modal-dialog" style="width: 1200px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h3 class="smaller lighter blue no-margin">新增消息</h3>
+				</div>
+				<form id="addForm" method="post">
+					<div class="modal-body">
+<input type="hidden" name="channelId" value="<c:out value="${channelId}"/>" />
+						<table id="info"
+							class="table table-striped table-bordered table-hover dataTable no-footer DTTT_selectable">
+							<tr>
+								<td class="left" style="width: 45px;">发送人:</td>
+								<td colspan="3"><input type="text" name="name" id="name_add" value="sender"/></td>
+							</tr>
+							<tr>
+								<td class="left">消息内容:</td>
+								<td style="width: 430px;">
+								<textarea name="content" id="content_add" data-provide="markdown" data-iconlibrary="fa" rows="23" cols="130" class="md-input" style="resize: none;">**Markdown Editor** inside a *widget box*
+								</textarea></td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="modal-footer">
+						<button class="btn btn-sm pull-right"
+							onclick="addConfig('msg/insertMsg');return false;">确定</button>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="roleadd-modal-modify" class="modal fade" tabindex="-1">
+		<div class="modal-dialog" style="width: 1200px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h3 class="smaller lighter blue no-margin">编辑频道</h3>
+				</div>
+				<form id="modForm" method="post">
+					<input type="hidden" name="id" id="appEdit_id" value="" />
+					<input type="hidden" name="channelId" value="<c:out value="${channelId}"/>" />
+					<div class="modal-body">
+
+						<table id="info"
+							class="table table-striped table-bordered table-hover dataTable no-footer DTTT_selectable">
+							<tr>
+								<td class="left" style="width: 45px;">key:</td>
+								<td colspan="3"><input type="text" name="name"
+									id="name_edit" value="" /></td>
+
+							</tr>
+							<tr>
+								<td class="left">频道描述:</td>
+								<td style="width: 430px;"><textarea rows="23" cols="130"
+										id="channelName_edit" name="channelName"></textarea></td>
+							</tr>
+
+						</table>
+					</div>
+
+					<div class="modal-footer">
+						<button class="btn btn-sm" onclick="formatMod();return false;">格式化</button>
+						&nbsp;
+						<button class="btn btn-sm pull-right"
+							onclick="modifyConfig('config/appconfigupdate');return false;">
+							保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 遮罩层end -->
+	<!-- basic scripts -->
+
+
+
 <div>
 	<script src="commons/js/rating.js"></script>
 	<script src="commons/js/app.js"></script>
@@ -180,5 +265,19 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
         		$(this).prop('checked', th_checked);
         	});
         }
+
+
+         function addConfig(goUrl){
+
+                    if($('#name_add').val()==''){
+                        alert("请填发送人名称");
+                    }else if($('#content_add').val() == ''){
+                        alert("请填消息内容");
+                    }else{
+                         $('#addForm').attr("action", goUrl);
+                         $('#addForm').submit();
+                    }
+
+               }
 	</script>
 </div>

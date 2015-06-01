@@ -22,5 +22,5 @@ INSERT INTO msge VALUES('10000','chen','我想要很长的一个消息，我想�
 INSERT INTO msge VALUES('10001','wei','msg','channel2','1000','1432807738908','1432807738908');
 
 
-INSERT INTO sequence VALUES('msgnum', 1000);
-INSERT INTO sequence VALUES('channelnum', 1000);
+INSERT INTO sequence VALUES('msgnum', 10002);
+INSERT INTO sequence VALUES('channelnum', 2000);
