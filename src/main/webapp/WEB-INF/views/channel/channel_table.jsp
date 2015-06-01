@@ -186,6 +186,7 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 								<td style="width: 430px;">
 										<textarea name="description" id="description_add" data-provide="markdown" data-iconlibrary="fa" rows="23" cols="130" class="md-input" style="resize: none;">**Markdown Editor** inside a *widget box*
 										</textarea>
+
 										</td>
 							</tr>
 						</table>
@@ -241,8 +242,30 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 				</form>
 			</div>
 		</div>
+<div id="preview-channel" class="modal fade" tabindex="-1">
+		<div class="modal-dialog" style="width: 1200px;">
+			<div class="modal-content">
+					<div class="modal-body">
+						<div class="md-preview" data-provider="markdown-preview" style="width: 865px; height: 215px; resize: none;"><p><strong>Markdown Editor</strong> inside a <em>widget box</em></p>
+
+                                                                    <ul><li>list item 1</li><li>list item 2</li><li>list item 3</li></ul></div>
+
+                        							</div>
+					</div>
+
+			</div>
+		</div>
 	</div>
+
+
+
+
+
 	<!-- 遮罩层end -->
+
+
+
+
 	<!-- basic scripts -->
 
 

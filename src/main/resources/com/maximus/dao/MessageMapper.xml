@@ -60,6 +60,7 @@
     <select id="queryAll" parameterType="String" resultType="Msge">
         SELECT * FROM MSGE
         WHERE CHANNELID = #{channelId}
+        ORDER BY CREATETIME DESC
     </select>
 
 </mapper>

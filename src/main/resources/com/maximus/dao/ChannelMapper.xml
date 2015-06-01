@@ -53,7 +53,7 @@
 
 
     <select id="queryAll" resultType="Channel">
-        SELECT * FROM CHANNEL WHERE 1=1
+        SELECT * FROM CHANNEL WHERE 1=1 ORDER BY CREATETIME DESC
     </select>
 
 
