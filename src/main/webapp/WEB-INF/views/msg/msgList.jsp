@@ -44,14 +44,13 @@
 									</span>
 								</c:if>
 								<div class="hidden-sm hidden-xs action-buttons">
-											<label class="pink"> <i class="ace-icon fa fa-plus green"></i>
-													<a href="#roleadd-modal" role="button" class="blue"
-													data-toggle="modal" data-target="#roleadd-modal">发消息</a>
-											 </label>
-											<a class="red" href="javascript:batchOper('200')"
-												title="批量删除"> <i
-												class="ace-icon fa fa-trash-o bigger-200"></i>
-											</a>
+									<label class="pink"> <i
+										class="ace-icon fa fa-plus green"></i> <a
+										href="#roleadd-modal" role="button" class="blue"
+										data-toggle="modal" data-target="#roleadd-modal">发消息</a>
+									</label> <a class="red" href="javascript:batchOper('200')" title="批量删除">
+										<i class="ace-icon fa fa-trash-o bigger-200"></i>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -84,64 +83,61 @@
 	<script src="dist/js/ace-elements.min.js"></script>
 
 	<!-- 操作 -->
-    	<script type="text/javascript">
+	<script type="text/javascript">
+		function batchOper(oper) {
+			var checkboxValue = '';
+			var dataType = null;
+			$("input[type=checkbox][rel=check]:checked").each(function() {
+				checkboxValue += $(this).attr("id") + ',';
+				dataType = $("#tr-" + $(this).attr("id")).attr("data-type");
+			});
+			if (checkboxValue.length > 0) {
+				checkboxValue = checkboxValue.substring(0,
+						checkboxValue.length - 1);
+				ajaxSubmit(checkboxValue);
+			} else {
+				alert("请选择符合条件的数据");
+				return;
+			}
+		}
 
-        function batchOper(oper) {
-        	var checkboxValue = '';
-        	var dataType = null;
-        	$("input[type=checkbox][rel=check]:checked").each(function() {
-        		checkboxValue += $(this).attr("id") + ',';
-        		dataType = $("#tr-" + $(this).attr("id")).attr("data-type");
-        	});
-        	if (checkboxValue.length > 0) {
-        		checkboxValue = checkboxValue.substring(0, checkboxValue.length - 1);
-        		ajaxSubmit(checkboxValue);
-        	} else {
-        		alert("请选择符合条件的数据");
-        		return;
-        	}
-        }
+		// id集合，操作类型，富文本标识，原始文本标识，封用户/IP值
+		function ajaxSubmit(ids) {
+			var delayFlag = $("#delay").val();
+			var batchBtnFlag = true;// 是否是批量操作
 
-        // id集合，操作类型，富文本标识，原始文本标识，封用户/IP值
-        function ajaxSubmit(ids) {
-        	var delayFlag = $("#delay").val();
-        	var batchBtnFlag = true;// 是否是批量操作
+			var data = '{mongoIds:\"' + ids + '\"}';
+			var url = "msg/removeall";
 
+			$.ajax({
+				url : url,
+				type : 'POST',
+				data : data,
+				datatype : "json",
+				contentType : "application/json; charset=utf-8",
+				success : function(result) {
+					console.log(result);
+					if (result) {
+						var ids = result.mongoIds.split(",");
+						for (var i = 0; i < ids.length; i++) {
+							hideTr(ids[i])
+						}
+					}
 
-        	var data = '{mongoIds:\"' + ids + '\"}';
-        	var url = "msg/removeall";
+				},
+				error : function() {
+					overLayer('fail', '请求异常', null, dataType);
+					if (originalContentFlag != null) {
+						resetOriginalInfo(ids, oper, richTextFlag);
+					}
+				}
+			});
+		}
 
-        	$
-        			.ajax({
-        				url : url,
-        				type : 'POST',
-        				data : data,
-        				datatype : "json",
-        				contentType : "application/json; charset=utf-8",
-        				success : function(result) {
-        				console.log(result);
-    						if(result){
-    							var ids = result.mongoIds.split(",");
-    							for(var i=0;i<ids.length;i++){
-    								hideTr(ids[i])
-    							}
-    						}
-
-
-        				},
-        				error : function() {
-        					overLayer('fail', '请求异常', null, dataType);
-        					if (originalContentFlag != null) {
-        						resetOriginalInfo(ids, oper, richTextFlag);
-        					}
-        				}
-        			});
-        }
-
-        function hideTr(id) {
-        		$("#tr-" + id).removeAttr("rel");
-        		$("#" + id).removeAttr("rel");
-        		$("#tr-" + id).hide();
-        }
-        </script>
+		function hideTr(id) {
+			$("#tr-" + id).removeAttr("rel");
+			$("#" + id).removeAttr("rel");
+			$("#tr-" + id).hide();
+		}
+	</script>
 </div>
