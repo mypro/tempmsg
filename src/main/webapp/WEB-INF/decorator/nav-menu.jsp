@@ -27,19 +27,7 @@
 					频道管理 </span>
 		</a> <b class="arrow"></b></li>
 
-		<li class="" id="menu-statistic"><a href="#"
-			class="dropdown-toggle"> <i class="menu-icon fa fa-filter"></i> <span
-				class="menu-text"> 统计查询 </span> <b class="arrow fa fa-angle-down"></b>
-		</a> <b class="arrow"></b>
-			<ul class="submenu">
-					<li class="" id="statistic-classify"><a
-						href="statistic/classify"> <i
-							class="menu-icon fa fa-file-text"></i> 绩效统计
-					</a> <b class="arrow"></b></li>
-					<li class="" id="statistic-app"><a href="statistic/app"> <i
-							class="menu-icon fa fa-file-text"></i> 应用统计
-					</a> <b class="arrow"></b></li>
-			</ul></li>
+
 
 		<li class="" id="menu-sys"><a href="#" class="dropdown-toggle">
 				<i class="menu-icon fa fa-wrench"></i> <span class="menu-text">
