@@ -126,8 +126,8 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 		<th class="sorting_disabled ">消息内容</th>
 		<th class="sorting_disabled "></th>
 		<th width="10px" class="sorting_disabled center align-middle"><label
-			class="pos-rel"> <input type="checkbox" id="checkAllNeed"
-				onclick="checkNeed(this)" class="ace" /> <span class="lbl"></span>
+			class="pos-rel"> <input type="checkbox" id="checkAllMsg"
+				onclick="checkAllMsg(this)" class="ace" /> <span class="lbl"></span>
 		</label></th>
 	</thead>
 	<tbody id="simple-table">
@@ -168,13 +168,17 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 	<script src="commons/js/app.js"></script>
 	<script src="commons/js/moment-with-locales.js"></script>
 	<script type="text/javascript">
-	jQuery(function($) {
-        if(${needvolist.size()}>0){
-            if("${mid}"!="null" && "${mid}"!=""){
-            	//openContent('${mid}');
-            	//定位当前行TODO
-            }
+	function checkAllMsg(obj) {
+        	var th_checked = obj.checked;
+        	var active_class = 'active';
+        	$('#simple-table input[type=checkbox]').each(function() {
+        		if (th_checked) {
+        			$(this).parent().parent().parent().addClass(active_class);
+        		} else {
+        			$(this).parent().parent().parent().removeClass(active_class);
+        		}
+        		$(this).prop('checked', th_checked);
+        	});
         }
-    });
 	</script>
 </div>

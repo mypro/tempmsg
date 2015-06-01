@@ -1,11 +1,15 @@
 package com.maximus.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.maximus.model.Channel;
 import com.maximus.service.BaseService;
 import com.maximus.service.ChannelService;
+import com.maximus.util.Lang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,13 +40,15 @@ public class ChannelController extends AbstractAction {
     }
 
     @RequestMapping("queryAllforMenu")
-    public @ResponseBody
+    public
+    @ResponseBody
     String queryAllforMenu(Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
         List<Channel> channels = channelService.queryAll();
         model.addAttribute("channels", channels);
         return returnForAjax(request, response, channels);
     }
+
     @RequestMapping("insertChannel")
     public String insertChannel(Model model, HttpServletRequest request, HttpServletResponse response, Map<String, Object> context, String name) throws IOException, ParseException {
         return "message";
@@ -54,8 +60,21 @@ public class ChannelController extends AbstractAction {
     }
 
     @RequestMapping("removeall")
-    public String removeall(Model model, HttpServletRequest request, HttpServletResponse response, Map<String, Object> context, String collectionname, String name) {
-        return "message";
+    public
+    @ResponseBody
+    String removeall(Model model, HttpServletRequest request, HttpServletResponse response, @RequestBody String json) {
+        Map<String, String> paramMap = JSONObject.parseObject(json, Map.class);
+        String mongoIds = paramMap.get("mongoIds");
+        if (!Lang.isEmpty(mongoIds)) {
+            String[] ids = mongoIds.split(",");
+            Channel cl = new Channel();
+            for (int i = 0; i < ids.length; i++) {
+                cl.setId(Integer.parseInt(ids[i]));
+                channelService.deleteChannel(cl);
+            }
+        }
+
+        return returnForAjax(request, response, JSON.parseObject(json));
     }
 
     @RequestMapping("removeOne")

@@ -1,12 +1,17 @@
 package com.maximus.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.maximus.model.Msge;
 import com.maximus.service.BaseService;
 import com.maximus.service.MessageService;
+import com.maximus.util.Lang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/msg")
-public class MessageController {
+public class MessageController extends AbstractAction {
 
     @Autowired
     private BaseService baseService;
@@ -39,7 +44,19 @@ public class MessageController {
     }
 
     @RequestMapping("removeall")
-    public String removeall(Model model, HttpServletRequest request, HttpServletResponse response, Map<String, Object> context, String collectionname, String name) {
-        return "redirect:/msg/queryMsg.do?name=" + name;
+    public
+    @ResponseBody
+    String removeall(Model model, HttpServletRequest request, HttpServletResponse response, @RequestBody String json) {
+        Map<String, String> paramMap = JSONObject.parseObject(json, Map.class);
+        String mongoIds = paramMap.get("mongoIds");
+        if (!Lang.isEmpty(mongoIds)) {
+            String[] ids = mongoIds.split(",");
+            Msge msg = new Msge();
+            for (int i = 0; i < ids.length; i++) {
+                msg.setId(Integer.parseInt(ids[i]));
+                messageService.deleteMessage(msg);
+            }
+        }
+        return returnForAjax(request, response, JSON.parseObject(json));
     }
 }

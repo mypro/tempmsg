@@ -44,15 +44,12 @@
 								</c:if>
 								<div class="hidden-sm hidden-xs action-buttons">
 											<a class="green" href="javascript:batchOper('100')"
-												title="批量通过"> <i class="ace-icon fa fa-check bigger-230"></i>
+												title="批量通过"> <i class="ace-icon fa glyphicon-plus bigger-230"></i>
 											</a>
 											<a class="red" href="javascript:batchOper('200')"
 												title="批量删除"> <i
 												class="ace-icon fa fa-trash-o bigger-200"></i>
 											</a>
-									<a class="blue" href="javascript:batchOper('900')"
-										title="批量添加舆情"> <i class="ace-icon fa fa-star bigger-230"></i>
-									</a>
 								</div>
 							</div>
 						</div>
@@ -84,88 +81,65 @@
 	<!-- ace scripts -->
 	<script src="dist/js/ace-elements.min.js"></script>
 
-	<!-- 富文本相关 -->
-	<script type="text/javascript">
-	var actionUrl = "censor/all";
-	jQuery(function($) {
-		$("#searchForm").attr("action",actionUrl);
-		$("#gritter-light").click();
-		//实例化multiSelect类
-        var xhSelect = new multiSelect({
-            firLevelId : "firLevel",
-            secLevelId : "secLevel",
-            thiLevelId : "thiLevelId",
-            fouLevelId : "fouLevelId",
-        });
-        xhSelect.init("${appId}", "${column}", "${extendedColumn1}", "${extendedColumn2}");
+	<!-- 操作 -->
+    	<script type="text/javascript">
 
-        var active_class = 'active';
+        function batchOper(oper) {
+        	var checkboxValue = '';
+        	var dataType = null;
+        	$("input[type=checkbox][rel=check]:checked").each(function() {
+        		checkboxValue += $(this).attr("id") + ',';
+        		dataType = $("#tr-" + $(this).attr("id")).attr("data-type");
+        	});
+        	if (checkboxValue.length > 0) {
+        		checkboxValue = checkboxValue.substring(0, checkboxValue.length - 1);
+        		ajaxSubmit(checkboxValue);
+        	} else {
+        		alert("请选择符合条件的数据");
+        		return;
+        	}
+        }
 
-        $('#simple-table').on('click', 'td input[type=checkbox]',
-                function() {
-                    var $row = $(this).closest('tr');
-                    if (this.checked)
-                        $row.addClass(active_class);
-                    else
-                        $row.removeClass(active_class);
-                });
-        $("#searchBtn").on(ace.click_event, function() {
-        	$("#searchForm").submit();
-            //window.location.href = "censor/all?pageSize=${pager.pageSize}&pageNumber=1&keyword="+$("#keyword").val();
-        });
-        $('#page-size').val(${pager.pageSize});
-     $('[data-rel="tooltip"]').tooltip({
-                     placement : tooltip_placement
-                 });
-     $("span[name='dateForm']").each(function() {
-         var date = $(this);
-         var time = date.attr('data-date');
-         if (time != null && time != "") {
-             var dateForm = moment(new Date(time)).locale('zh-cn');
-             $(this).html(dateForm.format('LLL'));
-         }
-     });
+        // id集合，操作类型，富文本标识，原始文本标识，封用户/IP值
+        function ajaxSubmit(ids) {
+        	var delayFlag = $("#delay").val();
+        	var batchBtnFlag = true;// 是否是批量操作
 
-     $("i[name='dateForm']").each(function() {
-         var date = $(this);
-         var time = date.attr('data-date');
-         if (time != null && time != "") {
-             var dateForm = moment(new Date(time)).locale('zh-cn');
-             $(this).attr("title",$(this).attr("title")+'于'+dateForm.format('LLL')+'锁定');
-         }
-     });
-     $('#pagination').pagination({
-         link: actionUrl +'?pageSize=${pager.pageSize}&pageNumber={p}&keyword=${keyword}&companyId=${companyId}&appId=${appId}&column=${column}&extendedColumn1=${extendedColumn1}&extendedColumn2=${extendedColumn2}&type=${type}&delay=${delay}&mid=${mid}',
-         count:${pager.pageCount},
-         current:${pager.pageNumber}
-       });
-     $('#page-size').on('change', 
-             function() {
-                console.info($('#page-size').val());
-                window.location.href = actionUrl+"?pageSize="+$('#page-size').val()+"&pageNumber=1&keyword=${keyword}&companyId=${companyId}&appId=${appId}&column=${column}&extendedColumn1=${extendedColumn1}&extendedColumn2=${extendedColumn2}&type=${type}&delay=${delay}&mid=${mid}";
-             });
-    });
-	
-	function refreshWindow(oper,dataType,batchType){
-		if(dataType!=null && dataType==1 && !batchType){
-			window.location.href = "../"+actionUrl+"?pageSize="+$('#page-size').val()+"&pageNumber=${pager.pageNumber}&keyword=${keyword}&companyId=${companyId}&appId=${appId}&column=${column}&extendedColumn1=${extendedColumn1}&extendedColumn2=${extendedColumn2}&type=${type}&delay=${delay}&mid=${mid}";
-			
-		}else{
-			window.location.href = actionUrl+"?pageSize="+$('#page-size').val()+"&pageNumber=${pager.pageNumber}&keyword=${keyword}&companyId=${companyId}&appId=${appId}&column=${column}&extendedColumn1=${extendedColumn1}&extendedColumn2=${extendedColumn2}&type=${type}&delay=${delay}&mid=${mid}";
-		}
-	}
-	function tooltip_placement(context, source) {
-	    var $source = $(source);
-	    var $parent = $source.closest('table')
-	    var off1 = $parent.offset();
-	    var w1 = $parent.width();
 
-	    var off2 = $source.offset();
-	    // var w2 = $source.width();
+        	var data = '{mongoIds:\"' + ids + '\"}';
+        	var url = "msg/removeall";
 
-	    if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2))
-	        return 'right';
-	    return 'left';
-	}
-	</script>
+        	$
+        			.ajax({
+        				url : url,
+        				type : 'POST',
+        				data : data,
+        				datatype : "json",
+        				contentType : "application/json; charset=utf-8",
+        				success : function(result) {
+        				console.log(result);
+    						if(result){
+    							var ids = result.mongoIds.split(",");
+    							for(var i=0;i<ids.length;i++){
+    								hideTr(ids[i])
+    							}
+    						}
+
+
+        				},
+        				error : function() {
+        					overLayer('fail', '请求异常', null, dataType);
+        					if (originalContentFlag != null) {
+        						resetOriginalInfo(ids, oper, richTextFlag);
+        					}
+        				}
+        			});
+        }
+
+        function hideTr(id) {
+        		$("#tr-" + id).removeAttr("rel");
+        		$("#" + id).removeAttr("rel");
+        		$("#tr-" + id).hide();
+        }
+        </script>
 </div>

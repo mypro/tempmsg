@@ -86,9 +86,10 @@ $("#menu-allchannel").click(function(){
         				contentType : "application/json; charset=utf-8",
         				success : function(result) {
 									console.log(result);
-										//$("#channelsName").removeChilds();
+									$("#channelsName").children().remove();
 									for(var i=0;i<result.length;i++){
-										console.log(result[i].name);
+									$("#channelsName").append("<li class=\"\" id=\"menu-mycensor-short\"><a href=\"msg/queryAll?channelId="+result[i].id+"\">"
+									 										+ "<i class=\"menu-icon fa fa-file-text\"></i>"+result[i].name+"</a> <b class=\"arrow\"></b></li>");
 									}
         				},
         				error : function() {
