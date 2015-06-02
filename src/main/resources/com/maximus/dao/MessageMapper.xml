@@ -45,7 +45,7 @@
         WHERE ID = #{id}
     </delete>
 
-    <select id="findMsgById" parameterType="int" resultType="Msge">
+    <select id="findMsgById" parameterType="Integer" resultType="Msge">
         SELECT * FROM MSGE
         WHERE ID = #{id}
     </select>

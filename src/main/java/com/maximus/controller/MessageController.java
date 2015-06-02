@@ -32,7 +32,7 @@ public class MessageController extends AbstractAction {
     private MessageService messageService;
 
     @RequestMapping("queryAll")
-    public String queryAll(Model model, HttpServletRequest request, HttpServletResponse response,  String channelId) throws UnsupportedEncodingException {
+    public String queryAll(Model model, HttpServletRequest request, HttpServletResponse response, String channelId) throws UnsupportedEncodingException {
 //        int channel = Integer.valueOf(channelId);
         List<Msge> msgs = messageService.queryAll(channelId);
         model.addAttribute("msgs", msgs);
@@ -41,8 +41,8 @@ public class MessageController extends AbstractAction {
     }
 
     @RequestMapping("insertMsg")
-    public String insertMsg(Model model, HttpServletRequest request, HttpServletResponse response,  @RequestParam(required = true) String name,
-                            @RequestParam(required = true) String content,@RequestParam(required = true) String channelId) throws IOException, ParseException {
+    public String insertMsg(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam(required = true) String name,
+                            @RequestParam(required = true) String content, @RequestParam(required = true) String channelId) throws IOException, ParseException {
         Msge msg = new Msge();
 
         msg.setName(name);
@@ -50,11 +50,19 @@ public class MessageController extends AbstractAction {
         msg.setCreateTime(System.currentTimeMillis());
         msg.setChannelId(Integer.parseInt(channelId));
         messageService.insertMessage(msg);
-        return "redirect:/msg/queryAll?channelId="+channelId;
+        return "redirect:/msg/queryAll?channelId=" + channelId;
     }
+
     @RequestMapping("queryMsg")
-    public String searchUser(Model model, HttpServletRequest request, HttpServletResponse response, Map<String, Object> context, String name) throws IOException, ParseException {
-        return "message";
+    public String searchUser(Model model, HttpServletRequest request, HttpServletResponse response, @RequestBody String json) throws IOException, ParseException {
+        JSONObject obj = JSONObject.parseObject(json);
+        Integer mongoId = Integer.parseInt(obj.getString("mongoId"));
+        Msge msg = null;
+        if (!Lang.isEmpty(mongoId)) {
+            msg = messageService.findMsgById(mongoId);
+        }
+
+        return returnForAjax(request, response, msg.getContent());
     }
 
     @RequestMapping("removeall")

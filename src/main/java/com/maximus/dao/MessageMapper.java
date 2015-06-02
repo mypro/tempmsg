@@ -15,7 +15,7 @@ public interface MessageMapper {
 
     void deleteMessage(Msge msg);
 
-    Msge findMsgById(String msgid);
+    Msge findMsgById(Integer msgid);
 
     Msge findMsgByname(String msgName);
 

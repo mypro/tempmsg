@@ -33,7 +33,7 @@ public class MessageServiceImpl implements MessageService {
         messageDao.deleteMessage(msg);
     }
 
-    public Msge findMsgById(String msgid) {
+    public Msge findMsgById(Integer msgid) {
         Msge msge =  messageDao.findMsgById(msgid);
         return msge;
     }

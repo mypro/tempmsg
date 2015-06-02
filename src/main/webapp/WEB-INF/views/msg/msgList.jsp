@@ -69,11 +69,7 @@
 <div id="botton_javascript">
 	<!-- basic scripts -->
 
-	<script src="commons/js/bootstrap-pagination.js"></script>
-	<script src="commons/js/censor.js"></script>
 	<script src="dist/js/bootbox.min.js"></script>
-	<script type="text/javascript" src="commons/js/showButton.js"></script>
-	<script src="commons/js/xh_multi_select.js"></script>
 
 	<!-- 富文本相关 -->
 

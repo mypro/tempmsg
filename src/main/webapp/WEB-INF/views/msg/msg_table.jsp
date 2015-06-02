@@ -118,7 +118,7 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 	text-shadow: 0 -1px 0 rgba(0, 200, 0, .25)
 }
 </style>
-<input type="hidden" id="length_summary" value="${length_summary }" />
+<input type="hidden" id="msgs" value="${msgs}" />
 <table id="st"
 	class="table table-striped table-bordered table-hover dataTable no-footer DTTT_selectable">
 	<thead>
@@ -131,8 +131,8 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 		</label></th>
 	</thead>
 	<tbody id="simple-table">
-		<c:forEach items="${msgs}" var="row">
-			<tr id="tr-${row.id}" rel="tr">
+		<c:forEach items="${msgs}" var="row" varStatus="vs">
+			<tr id="tr-${row.id}" rel="tr" >
 				<td>
 					<div class="appid-name center align-middle"></div>
 					<div>
@@ -141,11 +141,11 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 						</ul>
 					</div>
 				</td>
-				<td>
-					<div class="appid-name center align-middle"></div>
+				<td  href="#preview-msg" role="button" class="blue" data-toggle="modal" data-target="#preview-msg" onclick="viewContent('${row.id}');">
+					<div class="appid-name center align-middle"  ></div>
 					<div>
 						<ul class="nav ace-nav center align-middle">
-							<c:out value="${row.content}" />
+							<c:out value="${fn:substring(row.content, 0, 120)}" />
 						</ul>
 					</div>
 				</td>
@@ -189,7 +189,7 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 							<td class="left">消息内容:</td>
 							<td style="width: 430px;"><textarea name="content"
 									id="content_add" data-provide="markdown" data-iconlibrary="fa"
-									rows="23" cols="130" class="md-input" style="resize: none;">**Markdown Editor** inside a *widget box*
+									rows="23" cols="130" class="md-input" style="resize: none;">
 								</textarea></td>
 						</tr>
 					</table>
@@ -248,15 +248,31 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 		</div>
 	</div>
 </div>
+
+
+	<div id="preview-msg" class="modal fade" tabindex="-1">
+    		<div class="modal-dialog" style="width: 1200px;">
+    			<div class="modal-content">
+    				<div class="modal-body">
+    					<div id="" class="md-preview" data-provider="markdown-preview"
+    						style="width: 865px; height: 615px; resize: true;">
+    						<textarea name="contentview" id="contentview" data-provide="markdown" data-iconlibrary="fa"
+                            									rows="30" cols="140" class="md-input" style="resize: none;">**Markdown Editor** inside a *widget box*
+                            </textarea>
+    					</div>
+
+    				</div>
+    			</div>
+
+    		</div>
+    </div>
+
 <!-- 遮罩层end -->
 <!-- basic scripts -->
 
 
 
 <div>
-	<script src="commons/js/rating.js"></script>
-	<script src="commons/js/app.js"></script>
-	<script src="commons/js/moment-with-locales.js"></script>
 	<script type="text/javascript">
 		function checkAllMsg(obj) {
 			var th_checked = obj.checked;
@@ -285,6 +301,24 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 				$('#addForm').submit();
 			}
 
+		}
+
+		function viewContent(id){
+		var data ='{mongoId:\"'+id+'\"}';
+		var url = "msg/queryMsg";
+		$.ajax({
+        				url : url,
+        				type : 'POST',
+        				data : data,
+        				datatype : "json",
+        				contentType : "application/json; charset=utf-8",
+        				success : function(result) {
+							$("#contentview").html(result);
+        				},
+        				error : function() {
+        					console.log("查询消息内容异常");
+        				}
+        			});
 		}
 	</script>
 </div>
