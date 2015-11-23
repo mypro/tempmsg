@@ -141,7 +141,7 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
 						</ul>
 					</div>
 				</td>
-				<td  href="#preview-msg" role="button" class="blue" data-toggle="modal" data-target="#preview-msg" onclick="viewContent('${row.id}');">
+				<td  role="button" class="blue"  ondblclick="viewContent('${row.id}');">
 					<div class="appid-name center align-middle"  ></div>
 					<div>
 						<ul class="nav ace-nav center align-middle">
@@ -314,11 +314,13 @@ input[type=checkbox].ace.ace-switch.ace-switch-6:checked+.lbl::after {
         				contentType : "application/json; charset=utf-8",
         				success : function(result) {
 							$("#contentview").html(result);
+							$("#preview-msg").modal()
         				},
         				error : function() {
         					console.log("查询消息内容异常");
         				}
         			});
 		}
+
 	</script>
 </div>

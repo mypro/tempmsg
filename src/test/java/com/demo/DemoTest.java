@@ -28,6 +28,12 @@ public class DemoTest {
 	public void test() throws Exception {
 		System.out.println(new Date().getTime());
 		logger.debug("~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+		int big = 1234567890;
+		float approx = big;
+		System.out.println(big -  approx);
+		short s = 1;
+		int a = 2;
+		a = a+s;
+//		s = s+a;
 	}
-
 }
