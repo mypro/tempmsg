@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="fontawesome/css/font-awesome.min.css" />
 
 <!-- text fonts -->
-<link rel='stylesheet' href='http://fonts.useso.com/css?family=Open+Sans:300,400,600&subset=latin,latin-ext'>
+<link rel='stylesheet' href='fontawesome/css?family=Open+Sans:300,400,600&subset=latin,latin-ext'>
 
 <!-- ace styles -->
 <link rel="stylesheet" href="dist/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
